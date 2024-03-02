@@ -17,12 +17,14 @@ sudo systemctl start jenkins
 sudo systemctl status jenkins
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 
+
 #Install docker
 sudo apt install docker.io -y
 sudo usermod -aG docker ubuntu
 newgrp docker
 sudo chmod 777 /var/run/docker.sock
 docker version
+
 
 # Install Trivy
 sudo apt-get install wget apt-transport-https gnupg lsb-release -y
@@ -31,11 +33,13 @@ echo "deb [signed-by=/usr/share/keyrings/trivy.gpg] https://aquasecurity.github.
 sudo apt-get update
 sudo apt-get install trivy -y
 
+
 # Install Terraform
 sudo apt install wget -y
 wget -O- https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
 echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
 sudo apt update && sudo apt install terraform
+
 
 # Install kubectl
 sudo apt update
@@ -43,6 +47,7 @@ sudo apt install curl -y
 curl -LO https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl
 sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 kubectl version --client
+
 
 # Install AWS CLI 
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
